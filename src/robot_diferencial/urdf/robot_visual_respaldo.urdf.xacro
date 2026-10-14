@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"
+       name="robot_diferencial">
+
+  <!-- Parámetros generales -->
+
+  <xacro:property name="base_length" value="0.45"/>
+  <xacro:property name="base_width" value="0.32"/>
+  <xacro:property name="base_height" value="0.12"/>
+
+  <xacro:property name="wheel_radius" value="0.08"/>
+  <xacro:property name="wheel_width" value="0.04"/>
+  <xacro:property name="wheel_separation" value="0.36"/>
+
+  <!-- Enlace de referencia en el suelo -->
+
+  <link name="base_footprint"/>
+
+  <!-- Chasis -->
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="${base_length} ${base_width} ${base_height}"/>
+      </geometry>
+
+      <material name="blue">
+        <color rgba="0.1 0.3 0.8 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 ${wheel_radius}" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Rueda izquierda -->
+
+  <link name="left_wheel_link">
+    <visual>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+      </geometry>
+
+      <material name="black">
+        <color rgba="0.05 0.05 0.05 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel_link"/>
+
+    <origin
+      xyz="0 ${wheel_separation / 2.0} 0"
+      rpy="${pi / 2.0} 0 0"/>
+
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!-- Rueda derecha -->
+
+  <link name="right_wheel_link">
+    <visual>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+      </geometry>
+
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel_link"/>
+
+    <origin
+      xyz="0 ${-wheel_separation / 2.0} 0"
+      rpy="${pi / 2.0} 0 0"/>
+
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!-- Rueda de apoyo frontal -->
+
+  <link name="caster_link">
+    <visual>
+      <geometry>
+        <sphere radius="0.035"/>
+      </geometry>
+
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="caster_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_link"/>
+    <origin xyz="0.16 0 -0.05" rpy="0 0 0"/>
+  </joint>
+
+</robot>

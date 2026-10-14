@@ -1,0 +1,1194 @@
+<?xml version="1.0"?>
+
+<sdf version="1.9">
+
+  <world name="pista">
+
+    <!-- ================================================== -->
+    <!-- CONFIGURACIÓN GENERAL DEL MUNDO                    -->
+    <!-- ================================================== -->
+
+    <physics name="fisica" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin
+      filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics">
+    </plugin>
+
+    <plugin
+      filename="gz-sim-user-commands-system"
+      name="gz::sim::systems::UserCommands">
+    </plugin>
+
+    <plugin
+      filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+
+    <plugin
+      filename="gz-sim-sensors-system"
+      name="gz::sim::systems::Sensors">
+
+      <render_engine>ogre2</render_engine>
+
+    </plugin>
+
+    <scene>
+      <ambient>0.45 0.45 0.45 1.0</ambient>
+      <background>0.70 0.80 0.90 1.0</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <light type="directional" name="sun">
+
+      <pose>0 0 12 0 0 0</pose>
+
+      <cast_shadows>true</cast_shadows>
+
+      <diffuse>0.90 0.90 0.90 1.0</diffuse>
+      <specular>0.20 0.20 0.20 1.0</specular>
+
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+
+      <direction>-0.5 0.2 -0.9</direction>
+
+    </light>
+
+
+    <!-- ================================================== -->
+    <!-- SUELO                                              -->
+    <!-- ================================================== -->
+
+    <model name="suelo">
+
+      <static>true</static>
+
+      <link name="suelo_link">
+
+        <collision name="suelo_collision">
+
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>18 11</size>
+            </plane>
+          </geometry>
+
+        </collision>
+
+        <visual name="suelo_visual">
+
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>18 11</size>
+            </plane>
+          </geometry>
+
+          <material>
+            <ambient>0.18 0.20 0.22 1.0</ambient>
+            <diffuse>0.18 0.20 0.22 1.0</diffuse>
+            <specular>0.03 0.03 0.03 1.0</specular>
+          </material>
+
+        </visual>
+
+      </link>
+
+    </model>
+
+
+    <!-- ================================================== -->
+    <!-- CIRCUITO                                           -->
+    <!-- ================================================== -->
+
+    <model name="circuito">
+
+      <static>true</static>
+
+      <link name="muros_y_obstaculos">
+
+
+        <!-- ============================================== -->
+        <!-- RECTAS DEL MURO EXTERIOR                      -->
+        <!-- ============================================== -->
+
+        <collision name="exterior_superior_collision">
+
+          <pose>0 3.40 0.30 0 0 0</pose>
+
+          <geometry>
+            <box>
+              <size>8.20 0.18 0.60</size>
+            </box>
+          </geometry>
+
+        </collision>
+
+        <visual name="exterior_superior_visual">
+
+          <pose>0 3.40 0.30 0 0 0</pose>
+
+          <geometry>
+            <box>
+              <size>8.20 0.18 0.60</size>
+            </box>
+          </geometry>
+
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+
+        </visual>
+
+
+        <collision name="exterior_inferior_collision">
+
+          <pose>0 -3.40 0.30 0 0 0</pose>
+
+          <geometry>
+            <box>
+              <size>8.20 0.18 0.60</size>
+            </box>
+          </geometry>
+
+        </collision>
+
+        <visual name="exterior_inferior_visual">
+
+          <pose>0 -3.40 0.30 0 0 0</pose>
+
+          <geometry>
+            <box>
+              <size>8.20 0.18 0.60</size>
+            </box>
+          </geometry>
+
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+
+        </visual>
+
+
+        <!-- ============================================== -->
+        <!-- CURVA EXTERIOR DERECHA                        -->
+        <!-- Centro: x=4.0, y=0.0                         -->
+        <!-- Radio aproximado: 3.40 m                     -->
+        <!-- ============================================== -->
+
+        <collision name="exterior_derecha_01_collision">
+          <pose>4.663 -3.335 0.30 0 0 0.196</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_derecha_01_visual">
+          <pose>4.663 -3.335 0.30 0 0 0.196</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="exterior_derecha_02_collision">
+          <pose>5.889 -2.827 0.30 0 0 0.589</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_derecha_02_visual">
+          <pose>5.889 -2.827 0.30 0 0 0.589</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="exterior_derecha_03_collision">
+          <pose>6.827 -1.889 0.30 0 0 0.982</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_derecha_03_visual">
+          <pose>6.827 -1.889 0.30 0 0 0.982</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="exterior_derecha_04_collision">
+          <pose>7.335 -0.663 0.30 0 0 1.374</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_derecha_04_visual">
+          <pose>7.335 -0.663 0.30 0 0 1.374</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="exterior_derecha_05_collision">
+          <pose>7.335 0.663 0.30 0 0 1.767</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_derecha_05_visual">
+          <pose>7.335 0.663 0.30 0 0 1.767</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="exterior_derecha_06_collision">
+          <pose>6.827 1.889 0.30 0 0 2.160</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_derecha_06_visual">
+          <pose>6.827 1.889 0.30 0 0 2.160</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="exterior_derecha_07_collision">
+          <pose>5.889 2.827 0.30 0 0 2.553</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_derecha_07_visual">
+          <pose>5.889 2.827 0.30 0 0 2.553</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="exterior_derecha_08_collision">
+          <pose>4.663 3.335 0.30 0 0 2.945</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_derecha_08_visual">
+          <pose>4.663 3.335 0.30 0 0 2.945</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <!-- ============================================== -->
+        <!-- CURVA EXTERIOR IZQUIERDA                      -->
+        <!-- Centro: x=-4.0, y=0.0                        -->
+        <!-- ============================================== -->
+
+        <collision name="exterior_izquierda_01_collision">
+          <pose>-4.663 3.335 0.30 0 0 -2.945</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_izquierda_01_visual">
+          <pose>-4.663 3.335 0.30 0 0 -2.945</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="exterior_izquierda_02_collision">
+          <pose>-5.889 2.827 0.30 0 0 -2.553</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_izquierda_02_visual">
+          <pose>-5.889 2.827 0.30 0 0 -2.553</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="exterior_izquierda_03_collision">
+          <pose>-6.827 1.889 0.30 0 0 -2.160</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_izquierda_03_visual">
+          <pose>-6.827 1.889 0.30 0 0 -2.160</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="exterior_izquierda_04_collision">
+          <pose>-7.335 0.663 0.30 0 0 -1.767</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_izquierda_04_visual">
+          <pose>-7.335 0.663 0.30 0 0 -1.767</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="exterior_izquierda_05_collision">
+          <pose>-7.335 -0.663 0.30 0 0 -1.374</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_izquierda_05_visual">
+          <pose>-7.335 -0.663 0.30 0 0 -1.374</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="exterior_izquierda_06_collision">
+          <pose>-6.827 -1.889 0.30 0 0 -0.982</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_izquierda_06_visual">
+          <pose>-6.827 -1.889 0.30 0 0 -0.982</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="exterior_izquierda_07_collision">
+          <pose>-5.889 -2.827 0.30 0 0 -0.589</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_izquierda_07_visual">
+          <pose>-5.889 -2.827 0.30 0 0 -0.589</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="exterior_izquierda_08_collision">
+          <pose>-4.663 -3.335 0.30 0 0 -0.196</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="exterior_izquierda_08_visual">
+          <pose>-4.663 -3.335 0.30 0 0 -0.196</pose>
+          <geometry>
+            <box>
+              <size>1.377 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 0.84 0.88 1</ambient>
+            <diffuse>0.82 0.84 0.88 1</diffuse>
+          </material>
+        </visual>
+
+
+        <!-- ============================================== -->
+        <!-- RECTAS DEL ÓVALO INTERIOR                     -->
+        <!-- Desplazamiento hacia la derecha: 0.60 m       -->
+        <!-- ============================================== -->
+
+        <collision name="interior_superior_collision">
+
+          <pose>0.60 1.65 0.30 0 0 0</pose>
+
+          <geometry>
+            <box>
+              <size>8.20 0.18 0.60</size>
+            </box>
+          </geometry>
+
+        </collision>
+
+        <visual name="interior_superior_visual">
+
+          <pose>0.60 1.65 0.30 0 0 0</pose>
+
+          <geometry>
+            <box>
+              <size>8.20 0.18 0.60</size>
+            </box>
+          </geometry>
+
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+
+        </visual>
+
+
+        <collision name="interior_inferior_collision">
+
+          <pose>0.60 -1.65 0.30 0 0 0</pose>
+
+          <geometry>
+            <box>
+              <size>8.20 0.18 0.60</size>
+            </box>
+          </geometry>
+
+        </collision>
+
+        <visual name="interior_inferior_visual">
+
+          <pose>0.60 -1.65 0.30 0 0 0</pose>
+
+          <geometry>
+            <box>
+              <size>8.20 0.18 0.60</size>
+            </box>
+          </geometry>
+
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+
+        </visual>
+
+
+        <!-- ============================================== -->
+        <!-- CURVA INTERIOR DERECHA                        -->
+        <!-- Centro desplazado: x=4.60                    -->
+        <!-- Radio aproximado: 1.65 m                     -->
+        <!-- Esta es la curva estrecha                    -->
+        <!-- ============================================== -->
+
+        <collision name="interior_derecha_01_collision">
+          <pose>4.922 -1.618 0.30 0 0 0.196</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_derecha_01_visual">
+          <pose>4.922 -1.618 0.30 0 0 0.196</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="interior_derecha_02_collision">
+          <pose>5.517 -1.372 0.30 0 0 0.589</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_derecha_02_visual">
+          <pose>5.517 -1.372 0.30 0 0 0.589</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="interior_derecha_03_collision">
+          <pose>5.972 -0.917 0.30 0 0 0.982</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_derecha_03_visual">
+          <pose>5.972 -0.917 0.30 0 0 0.982</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="interior_derecha_04_collision">
+          <pose>6.218 -0.322 0.30 0 0 1.374</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_derecha_04_visual">
+          <pose>6.218 -0.322 0.30 0 0 1.374</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="interior_derecha_05_collision">
+          <pose>6.218 0.322 0.30 0 0 1.767</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_derecha_05_visual">
+          <pose>6.218 0.322 0.30 0 0 1.767</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="interior_derecha_06_collision">
+          <pose>5.972 0.917 0.30 0 0 2.160</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_derecha_06_visual">
+          <pose>5.972 0.917 0.30 0 0 2.160</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="interior_derecha_07_collision">
+          <pose>5.517 1.372 0.30 0 0 2.553</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_derecha_07_visual">
+          <pose>5.517 1.372 0.30 0 0 2.553</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="interior_derecha_08_collision">
+          <pose>4.922 1.618 0.30 0 0 2.945</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_derecha_08_visual">
+          <pose>4.922 1.618 0.30 0 0 2.945</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <!-- ============================================== -->
+        <!-- CURVA INTERIOR IZQUIERDA                      -->
+        <!-- Centro desplazado: x=-3.40                   -->
+        <!-- Esta curva queda más ancha                   -->
+        <!-- ============================================== -->
+
+        <collision name="interior_izquierda_01_collision">
+          <pose>-3.722 1.618 0.30 0 0 -2.945</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_izquierda_01_visual">
+          <pose>-3.722 1.618 0.30 0 0 -2.945</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="interior_izquierda_02_collision">
+          <pose>-4.317 1.372 0.30 0 0 -2.553</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_izquierda_02_visual">
+          <pose>-4.317 1.372 0.30 0 0 -2.553</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="interior_izquierda_03_collision">
+          <pose>-4.772 0.917 0.30 0 0 -2.160</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_izquierda_03_visual">
+          <pose>-4.772 0.917 0.30 0 0 -2.160</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="interior_izquierda_04_collision">
+          <pose>-5.018 0.322 0.30 0 0 -1.767</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_izquierda_04_visual">
+          <pose>-5.018 0.322 0.30 0 0 -1.767</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="interior_izquierda_05_collision">
+          <pose>-5.018 -0.322 0.30 0 0 -1.374</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_izquierda_05_visual">
+          <pose>-5.018 -0.322 0.30 0 0 -1.374</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="interior_izquierda_06_collision">
+          <pose>-4.772 -0.917 0.30 0 0 -0.982</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_izquierda_06_visual">
+          <pose>-4.772 -0.917 0.30 0 0 -0.982</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="interior_izquierda_07_collision">
+          <pose>-4.317 -1.372 0.30 0 0 -0.589</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_izquierda_07_visual">
+          <pose>-4.317 -1.372 0.30 0 0 -0.589</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <collision name="interior_izquierda_08_collision">
+          <pose>-3.722 -1.618 0.30 0 0 -0.196</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="interior_izquierda_08_visual">
+          <pose>-3.722 -1.618 0.30 0 0 -0.196</pose>
+          <geometry>
+            <box>
+              <size>0.694 0.18 0.60</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.92 0.32 0.12 1</ambient>
+            <diffuse>0.92 0.32 0.12 1</diffuse>
+          </material>
+        </visual>
+
+
+        <!-- ============================================== -->
+        <!-- OBSTÁCULOS EN LA RECTA INFERIOR               -->
+        <!-- ============================================== -->
+
+        <collision name="cono_inferior_1_collision">
+
+          <pose>0.0 -2.22 0.225 0 0 0</pose>
+
+          <geometry>
+            <cylinder>
+              <radius>0.18</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+
+        </collision>
+
+        <visual name="cono_inferior_1_visual">
+
+          <pose>0.0 -2.22 0.225 0 0 0</pose>
+
+          <geometry>
+            <cylinder>
+              <radius>0.18</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+
+          <material>
+            <ambient>0.95 0.42 0.04 1</ambient>
+            <diffuse>0.95 0.42 0.04 1</diffuse>
+          </material>
+
+        </visual>
+
+
+        <collision name="cono_inferior_2_collision">
+
+          <pose>1.45 -2.82 0.225 0 0 0</pose>
+
+          <geometry>
+            <cylinder>
+              <radius>0.18</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+
+        </collision>
+
+        <visual name="cono_inferior_2_visual">
+
+          <pose>1.45 -2.82 0.225 0 0 0</pose>
+
+          <geometry>
+            <cylinder>
+              <radius>0.18</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+
+          <material>
+            <ambient>0.95 0.42 0.04 1</ambient>
+            <diffuse>0.95 0.42 0.04 1</diffuse>
+          </material>
+
+        </visual>
+
+
+        <!-- ============================================== -->
+        <!-- OBSTÁCULOS EN LA RECTA SUPERIOR               -->
+        <!-- ============================================== -->
+
+        <collision name="obstaculo_superior_1_collision">
+
+          <pose>-1.20 2.25 0.25 0 0 0.35</pose>
+
+          <geometry>
+            <box>
+              <size>0.45 0.35 0.50</size>
+            </box>
+          </geometry>
+
+        </collision>
+
+        <visual name="obstaculo_superior_1_visual">
+
+          <pose>-1.20 2.25 0.25 0 0 0.35</pose>
+
+          <geometry>
+            <box>
+              <size>0.45 0.35 0.50</size>
+            </box>
+          </geometry>
+
+          <material>
+            <ambient>0.20 0.62 0.90 1</ambient>
+            <diffuse>0.20 0.62 0.90 1</diffuse>
+          </material>
+
+        </visual>
+
+
+        <collision name="obstaculo_superior_2_collision">
+
+          <pose>1.10 2.80 0.25 0 0 -0.35</pose>
+
+          <geometry>
+            <box>
+              <size>0.45 0.35 0.50</size>
+            </box>
+          </geometry>
+
+        </collision>
+
+        <visual name="obstaculo_superior_2_visual">
+
+          <pose>1.10 2.80 0.25 0 0 -0.35</pose>
+
+          <geometry>
+            <box>
+              <size>0.45 0.35 0.50</size>
+            </box>
+          </geometry>
+
+          <material>
+            <ambient>0.20 0.62 0.90 1</ambient>
+            <diffuse>0.20 0.62 0.90 1</diffuse>
+          </material>
+
+        </visual>
+
+
+        <!-- ============================================== -->
+        <!-- MARCA DEL PUNTO DE SPAWN                      -->
+        <!-- Sin colisión                                  -->
+        <!-- ============================================== -->
+
+        <visual name="marca_spawn_visual">
+
+          <pose>-2.60 -2.50 0.008 0 0 0</pose>
+
+          <geometry>
+            <box>
+              <size>0.75 0.55 0.012</size>
+            </box>
+          </geometry>
+
+          <material>
+            <ambient>0.08 0.85 0.18 1</ambient>
+            <diffuse>0.08 0.85 0.18 1</diffuse>
+            <emissive>0.02 0.20 0.04 1</emissive>
+          </material>
+
+        </visual>
+
+
+        <!-- ============================================== -->
+        <!-- LÍNEA DE SALIDA                               -->
+        <!-- Sin colisión                                  -->
+        <!-- ============================================== -->
+
+        <visual name="linea_salida_visual">
+
+          <pose>-2.00 -2.50 0.009 0 0 0</pose>
+
+          <geometry>
+            <box>
+              <size>0.10 1.45 0.014</size>
+            </box>
+          </geometry>
+
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+            <emissive>0.20 0.20 0.20 1</emissive>
+          </material>
+
+        </visual>
+
+      </link>
+
+    </model>
+
+  </world>
+
+</sdf>
